@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Vishant Soni — Full-Stack Engineer</title>
+	<meta name="description"
+		content="Full-Stack Engineer portfolio — Laravel, React, Node, Python microservices, MySQL." />
+
+	<!-- Tailwind CSS -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Google Fonts -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500&family=Inter:wght@300;400;600;700&display=swap"
+		rel="stylesheet">
+
+	<!-- Phosphor Icons -->
+	<script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					fontFamily: {
+						sans: ['Inter', 'sans-serif'],
+						mono: ['"Fira Code"', 'monospace']
+					}
+				}
+			}
+		}
+	</script>
+
+	<style>
+		:root {
+			--accent: #ff3333;
+			--bg: #000000;
+			--muted: #9a9a9a;
+			--panel: #0a0a0a;
+			--text: #e9e6e6;
+			--card: #0f0f0f;
+		}
+
+		html,
+		body {
+			height: 100%;
+		}
+
+		body {
+			margin: 0;
+			background: var(--bg);
+			color: var(--text);
+			font-family: Inter, sans-serif;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+		}
+
+		/* Fixed text selection for dark background */
+		::selection {
+			background: var(--accent);
+			color: #ffffff;
+		}
+
+		::-moz-selection {
+			background: var(--accent);
+			color: #ffffff;
+		}
+
+		.text-accent {
+			color: var(--accent) !important;
+		}
+
+		.bg-accent {
+			background: var(--accent) !important;
+		}
+
+		.border-accent {
+			border-color: var(--accent) !important;
+		}
+
+		.accent-tint {
+			background: rgba(255, 51, 51, 0.08);
+		}
+
+		.numbered-heading::before {
+			counter-increment: section;
+			content: "0" counter(section) ".";
+			margin-right: 10px;
+			color: var(--accent);
+			font-family: "Fira Code", monospace;
+			font-size: 0.9em;
+			font-weight: 400;
+		}
+
+		body {
+			counter-reset: section;
+		}
+
+		::-webkit-scrollbar {
+			width: 12px;
+		}
+
+		::-webkit-scrollbar-track {
+			background: var(--bg);
+		}
+
+		::-webkit-scrollbar-thumb {
+			background-color: var(--accent);
+			border: 3px solid var(--bg);
+			border-radius: 10px;
+		}
+
+		.img-wrapper {
+			position: relative;
+			border-radius: 6px;
+			overflow: hidden;
+			background: linear-gradient(180deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.6));
+		}
+
+		.img-wrapper img {
+			display: block;
+			width: 100%;
+			height: auto;
+			filter: grayscale(90%) contrast(1);
+			transition: filter .25s, transform .25s;
+		}
+
+		.img-wrapper:hover img {
+			filter: none;
+			transform: scale(1.02);
+		}
+
+		.tab-btn.active {
+			color: var(--accent);
+			background: var(--panel);
+			border-left: 3px solid var(--accent);
+		}
+
+		.fade-in-section {
+			opacity: 0;
+			transform: translateY(20px);
+			transition: all .6s ease-out;
+			will-change: opacity, transform;
+		}
+
+		.fade-in-section.is-visible {
+			opacity: 1;
+			transform: none;
+		}
+
+		.logo-circle {
+			width: 40px;
+			height: 40px;
+			border-radius: 9999px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			border: 2px solid var(--accent);
+			color: var(--accent);
+			font-family: "Fira Code", monospace;
+			font-weight: 600;
+		}
+
+		.muted {
+			color: var(--muted);
+		}
+
+		a {
+			text-decoration: none;
+		}
+
+		.vertical-text {
+			writing-mode: vertical-rl;
+			transform: rotate(180deg);
+			letter-spacing: .25em;
+		}
+
+		main {
+			padding-top: 3rem;
+			padding-bottom: 3rem;
+			max-width: 1100px;
+			margin: 0 auto;
+		}
+
+		footer {
+			color: var(--muted);
+		}
+
+		.panel {
+			background: var(--card);
+			border: 1px solid rgba(255, 255, 255, 0.03);
+			padding: 1rem;
+			border-radius: 8px;
+		}
+
+		/* Timeline Styles */
+		.timeline {
+			position: relative;
+			padding-left: 3rem;
+		}
+
+		.timeline::before {
+			content: '';
+			position: absolute;
+			left: 0;
+			top: 0;
+			bottom: 0;
+			width: 2px;
+			background: linear-gradient(180deg, var(--accent), rgba(255, 51, 51, 0.2));
+		}
+
+		.timeline-item {
+			position: relative;
+			margin-bottom: 2.5rem;
+			padding-bottom: 2.5rem;
+		}
+
+		.timeline-item:last-child {
+			margin-bottom: 0;
+			padding-bottom: 0;
+		}
+
+		.timeline-dot {
+			position: absolute;
+			left: -3rem;
+			top: 0;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background: var(--accent);
+			border: 3px solid var(--bg);
+			box-shadow: 0 0 0 3px var(--card);
+			z-index: 2;
+		}
+
+		.timeline-dot.current {
+			animation: pulse 2s ease-in-out infinite;
+		}
+
+		@keyframes pulse {
+
+			0%,
+			100% {
+				box-shadow: 0 0 0 3px var(--card), 0 0 0 6px rgba(255, 51, 51, 0.3);
+			}
+
+			50% {
+				box-shadow: 0 0 0 3px var(--card), 0 0 0 10px rgba(255, 51, 51, 0.1);
+			}
+		}
+
+		.timeline-content {
+			background: var(--card);
+			border: 1px solid rgba(255, 255, 255, 0.03);
+			border-left: 3px solid var(--accent);
+			padding: 1.5rem;
+			border-radius: 8px;
+			transition: transform 0.3s ease, box-shadow 0.3s ease;
+		}
+
+		.timeline-content:hover {
+			transform: translateX(4px);
+			box-shadow: 0 4px 20px rgba(255, 51, 51, 0.15);
+		}
+	</style>
+</head>
+
+<body class="antialiased leading-relaxed">
+
+	<!-- Navigation -->
+	<nav id="navbar" class="fixed w-full z-50 bg-transparent backdrop-blur-sm transition-all duration-300">
+		<div class="max-w-6xl mx-auto px-6 h-20 flex justify-between items-center">
+			<a href="#" class="logo-circle text-accent">V</a>
+
+			<div class="hidden md:flex items-center gap-8 font-mono text-sm muted">
+				<a href="#about" class="hover:text-accent transition-colors"><span
+						class="text-accent mr-1">01.</span>About</a>
+				<a href="#experience" class="hover:text-accent transition-colors"><span
+						class="text-accent mr-1">02.</span>Experience</a>
+				<a href="#work" class="hover:text-accent transition-colors"><span
+						class="text-accent mr-1">03.</span>Work</a>
+				<a href="#contact" class="hover:text-accent transition-colors"><span
+						class="text-accent mr-1">04.</span>Contact</a>
+				<a href="/public/Vishant Soni CV.pdf" download
+					class="text-accent border border-accent px-4 py-2 rounded hover:bg-accent hover:text-white transition-colors ml-4">Download
+					CV</a>
+			</div>
+
+			<button id="mobile-menu-btn" class="md:hidden text-accent text-3xl focus:outline-none">
+				<i class="ph ph-list"></i>
+			</button>
+		</div>
+
+		<div id="mobile-menu"
+			class="fixed inset-0 h-screen w-full transform translate-x-full transition-transform duration-300 md:hidden flex flex-col justify-center items-center z-40 bg-black/95">
+			<button id="close-menu-btn" class="absolute top-6 right-6 text-accent text-3xl">
+				<i class="ph ph-x"></i>
+			</button>
+			<div class="flex flex-col gap-8 text-center font-mono text-lg text-accent">
+				<a href="#about" class="mobile-link"><span class="block mb-1">01.</span>About</a>
+				<a href="#experience" class="mobile-link"><span class="block mb-1">02.</span>Experience</a>
+				<a href="#work" class="mobile-link"><span class="block mb-1">03.</span>Work</a>
+				<a href="#contact" class="mobile-link"><span class="block mb-1">04.</span>Contact</a>
+				<a href="/public/Vishant Soni CV.pdf" download
+					class="border border-accent px-8 py-3 rounded mt-4">Download CV</a>
+			</div>
+		</div>
+	</nav>
+
+	<!-- Main -->
+	<main class="px-6 md:px-12 lg:px-0">
+
+		<!-- Hero -->
+		<section id="hero"
+			class="min-h-screen flex flex-col justify-center items-start pt-20 fade-in-section is-visible">
+			<p class="text-accent font-mono mb-4 ml-1">Hi, my name is</p>
+			<h1 class="text-4xl md:text-6xl font-bold mb-3 tracking-tight">Vishant Soni.</h1>
+			<h2 class="text-2xl md:text-4xl font-semibold muted mb-6">I build scalable web applications & microservices.
+			</h2>
+			<p class="muted max-w-xl text-lg mb-8 leading-relaxed">
+				Full-Stack Engineer with 2 years of experience building scalable, data-driven web applications using
+				Laravel, React.js, and MySQL. Skilled in designing RESTful APIs, implementing microservices in Python
+				(Fast API) and Node.js, and optimizing performance through database tuning. Experienced in multi-tenant
+				SaaS, API architecture, and integrating modern frontend stacks with Zapier and JBs.
+			</p>
+			<div class="flex gap-4">
+				<a href="#work"
+					class="font-mono text-accent border border-accent px-6 py-3 rounded text-sm hover:bg-accent hover:text-white accent-tint transition-colors">See
+					Projects</a>
+				<a href="#contact"
+					class="font-mono muted border border-transparent px-6 py-3 rounded text-sm hover:text-accent transition-colors">Contact</a>
+			</div>
+		</section>
+
+		<!-- About -->
+		<section id="about" class="py-20 fade-in-section">
+			<h2
+				class="numbered-heading flex items-center text-2xl md:text-3xl font-bold mb-8 after:content-[''] after:block after:w-48 after:h-[1px] after:bg-[#202020] after:ml-5">
+				About Me</h2>
+
+			<div class="grid md:grid-cols-3 gap-8">
+				<div class="md:col-span-2 muted leading-relaxed space-y-4">
+					<p>
+						I'm a Full-Stack Engineer based in Vadodara, Gujarat with 2 years of experience building
+						reliable web applications, APIs, and multi-tenant SaaS solutions. I specialize in Laravel +
+						React stacks and design robust backend services that connect with frontend apps and third-party
+						systems.
+					</p>
+
+					<p>
+						I have experience creating multi-tenant, API-based SaaS platforms that orchestrate transactions
+						between diverse POS systems and physical retail stores. I also build backend microservices using
+						both Python (Fast API) and Node.js (Express), and integrate social/media automation using Meta
+						APIs, OpenAI API, and LangChain microservices.
+					</p>
+
+					<p>Technologies I work with recently:</p>
+					<ul class="grid grid-cols-2 gap-2 font-mono text-sm mt-4">
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>Laravel, PHP</li>
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>React.js, JavaScript</li>
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>Node.js (Express)</li>
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>Python (Fast API)</li>
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>MySQL</li>
+						<li class="flex items-center"><i
+								class="ph-fill ph-caret-right text-accent mr-2 text-xs"></i>Tailwind / Bootstrap /
+							jQuery</li>
+					</ul>
+				</div>
+
+				<div class="md:col-span-1 relative group">
+					<div
+						class="img-wrapper w-full max-w-[300px] mx-auto md:mx-0 relative z-10 transition-transform duration-300 group-hover:-translate-y-1">
+						<img src="/public/me.png" alt="Profile" class="w-full h-auto rounded shadow-lg block">
+					</div>
+					<div
+						class="absolute top-4 left-4 w-full max-w-[300px] h-full border-2 border-accent rounded z-0 transition-transform duration-300 group-hover:translate-x-1 hidden md:block">
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Experience Timeline -->
+		<section id="experience" class="py-20 fade-in-section">
+			<h2
+				class="numbered-heading flex items-center text-2xl md:text-3xl font-bold mb-12 after:content-[''] after:block after:w-48 after:h-[1px] after:bg-[#202020] after:ml-5">
+				Where I've Worked</h2>
+
+			<div class="timeline max-w-4xl mx-auto">
+				<!-- Web brains Technologies -->
+				<div class="timeline-item">
+					<div class="timeline-dot current"></div>
+					<div class="timeline-content">
+						<div class="flex flex-wrap justify-between items-start gap-2 mb-3">
+							<div>
+								<h3 class="text-xl font-semibold text-white">Full-Stack Laravel Developer</h3>
+								<p class="text-accent font-mono text-sm">Web brains Technologies Pvt. LTD.</p>
+							</div>
+							<span class="text-xs font-mono muted bg-accent/10 px-3 py-1 rounded-full">Current</span>
+						</div>
+						<p class="font-mono text-xs muted mb-4">19 May 2025 — Present · Vadodara, Gujarat</p>
+						<ul class="space-y-2 muted text-sm">
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Developing web applications using Laravel with React.js, Tailwind/Bootstrap
+									frontend</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Built multi-tenant SaaS platform orchestrating API transactions between POS
+									systems and retail stores</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Built backend microservices using Python (FastAPI) and Node.js enabling AI-driven
+									content automation and analytics through Meta APIs, OpenAI API, and LangChain</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Integrated Laravel APIs with React in microservice architecture</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Vardaam Websolutions -->
+				<div class="timeline-item">
+					<div class="timeline-dot"></div>
+					<div class="timeline-content">
+						<div>
+							<h3 class="text-lg font-semibold text-white">Backend Developer</h3>
+							<p class="text-accent font-mono text-sm">Vardaam Websolutions Pvt. LTD.</p>
+						</div>
+						<p class="font-mono text-xs muted mb-4 mt-2">19 Sep 2024 — 15 May 2025 · Vadodara, Gujarat</p>
+						<ul class="space-y-2 muted text-sm">
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Developed customized Admin panels using Laravel (Filament), Livewire, and
+									Alpine.js</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Integrated Laravel APIs with React front-end</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Maintained WordPress-based websites, plugins, and themes</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Rockers Technologies -->
+				<div class="timeline-item">
+					<div class="timeline-dot"></div>
+					<div class="timeline-content">
+						<div>
+							<h3 class="text-lg font-semibold text-white">Web Developer Trainee</h3>
+							<p class="text-accent font-mono text-sm">Rockers Technologies Pvt. LTD.</p>
+						</div>
+						<p class="font-mono text-xs muted mb-4 mt-2">1 Jul 2024 — 5 Sep 2024 · Vadodara, Gujarat</p>
+						<ul class="space-y-2 muted text-sm">
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Received training in React and Front-end development</span>
+							</li>
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Developed React components using HTML5, CSS3, and React Bootstrap</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Freelance -->
+				<div class="timeline-item">
+					<div class="timeline-dot"></div>
+					<div class="timeline-content">
+						<div>
+							<h3 class="text-lg font-semibold text-white">Freelance Web Developer</h3>
+						</div>
+						<p class="font-mono text-xs muted mb-4 mt-2">Dec 2023 — Jun 2024 · Vadodara, Gujarat</p>
+						<ul class="space-y-2 muted text-sm">
+							<li class="flex items-start"><i
+									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
+								<span>Developed websites and email templates using HTML and CSS</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+
+				<!-- Earlier Roles -->
+				<div class="timeline-item">
+					<div class="timeline-dot"></div>
+					<div class="timeline-content">
+						<div class="space-y-4">
+							<div>
+								<h3 class="text-base font-semibold text-white">Embedded Software Developer Trainee</h3>
+								<p class="text-accent font-mono text-xs">Leons Integrations Pvt. LTD.</p>
+								<p class="font-mono text-xs muted mt-1">20 Mar 2023 — 4 Oct 2023</p>
+							</div>
+
+							<div>
+								<h3 class="text-base font-semibold text-white">Junior Metallurgical Engineer</h3>
+								<p class="text-accent font-mono text-xs">TCR Advanced Engineering Pvt. LTD.</p>
+								<p class="font-mono text-xs muted mt-1">1 Sep 2022 — 1 Mar 2023</p>
+							</div>
+
+							<div>
+								<h3 class="text-base font-semibold text-white">Physics & Practical Teacher</h3>
+								<p class="font-mono text-xs muted mt-1">1 Feb 2021 — 1 Aug 2022</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Work / Projects -->
+		<section id="work" class="py-20 fade-in-section">
+			<h2
+				class="numbered-heading flex items-center text-2xl md:text-3xl font-bold mb-8 after:content-[''] after:block after:w-48 after:h-[1px] after:bg-[#202020] after:ml-5">
+				Some Things I've Built</h2>
+
+			<div class="grid md:grid-cols-2 gap-6">
+				<!-- Project: Multi-tenant SaaS -->
+				<article class="panel">
+					<p class="font-mono text-accent text-xs mb-2">Featured Project</p>
+					<h3 class="text-xl font-bold mb-3">Multi-tenant POS Orchestrator</h3>
+					<p class="muted text-sm mb-4">
+						A multi-tenant SaaS platform that orchestrates transactions between POS systems and retail
+						stores, implemented with Laravel APIs, worker queues, and MySQL optimizations. Includes API
+						documentation and monitoring.
+					</p>
+					<ul class="flex flex-wrap gap-2 font-mono text-xs muted mb-3">
+						<li>Laravel</li>
+						<li>MySQL</li>
+						<li>Redis</li>
+						<li>Docker</li>
+					</ul>
+				</article>
+
+				<!-- Project: Social Automation -->
+				<article class="panel">
+					<p class="font-mono text-accent text-xs mb-2">Featured Project</p>
+					<h3 class="text-xl font-bold mb-3">Social Media Automation Platform</h3>
+					<p class="muted text-sm mb-4">
+						Platform integrating Meta APIs, OpenAI, and LangChain microservices. Contains Node & Python
+						microservices for content automation, scheduling, and analytics.
+					</p>
+					<ul class="flex flex-wrap gap-2 font-mono text-xs muted mb-3">
+						<li>Node.js</li>
+						<li>Python</li>
+						<li>OpenAI</li>
+						<li>Meta APIs</li>
+					</ul>
+				</article>
+
+				<!-- Card: Migration & Maintenance -->
+				<article class="panel">
+					<h4 class="text-lg font-semibold mb-2">Legacy App Maintenance</h4>
+					<p class="muted text-sm">Upgraded and patched older PHP/Laravel apps, fixed critical bugs, and added
+						features while preserving data integrity.</p>
+				</article>
+
+				<!-- Card: Developer Tools -->
+				<article class="panel">
+					<h4 class="text-lg font-semibold mb-2">Developer Tools & Widgets</h4>
+					<p class="muted text-sm">Small tools and widgets for internal dashboards, analytics endpoints, and
+						data migration scripts.</p>
+				</article>
+			</div>
+		</section>
+
+		<!-- Skills & Education -->
+		<section class="py-20 fade-in-section">
+			<div class="grid md:grid-cols-2 gap-8">
+				<div>
+					<h3 class="text-2xl font-bold mb-4">Skills</h3>
+					<div class="space-y-3 muted text-sm">
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Backend:</p>
+							<p>Laravel, PHP, RESTful APIs, Node.js (Express), Python (Fast API)</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Frontend:</p>
+							<p>React.js, JavaScript, Tailwind, Bootstrap, jQuery</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Database:</p>
+							<p>MySQL</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Dev Tools:</p>
+							<p>Git, Postman, Docker (Basic), Composer, npm</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Automation & Integration:</p>
+							<p>Zapier, APIs, Workflow automation</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Other:</p>
+							<p>Redis, Performance optimization, SaaS architecture</p>
+						</div>
+					</div>
+				</div>
+
+				<div>
+					<h3 class="text-2xl font-bold mb-4">Education</h3>
+					<div class="space-y-4 muted text-sm">
+						<div>
+							<p class="text-white font-semibold">M.Sc. (Applied Physics)</p>
+							<p class="text-accent font-mono text-xs">Maharaja Sayajirao University of Baroda</p>
+							<p class="text-xs">May 2018 to October 2020 — 67.13%</p>
+						</div>
+						<div>
+							<p class="text-white font-semibold">B.Sc. (Physics)</p>
+							<p class="text-accent font-mono text-xs">Maharaja Sayajirao University of Baroda</p>
+							<p class="text-xs">May 2014 to Summer 2017 — 54.7%</p>
+						</div>
+						<div>
+							<p class="text-white font-semibold">HSC (GSEB, 2014)</p>
+							<p class="text-xs">54.46% (2012 to 2014)</p>
+						</div>
+					</div>
+
+					<div class="mt-8">
+						<h4 class="text-lg font-bold mb-3">Soft Skills</h4>
+						<p class="muted text-sm">Cross-team communication, Client communication, Problem-solving,
+							Adaptability, API Documentation</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- Contact / Social -->
+		<section id="contact" class="py-10 fade-in-section text-center">
+			<p class="text-accent font-mono mb-4">04. What's Next?</p>
+			<h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+			<p class="muted mb-6 max-w-xl mx-auto">Although not always actively looking, my inbox is open — feel free to
+				reach out about backend work, microservices, or freelance projects.</p>
+
+			<div class="flex flex-wrap justify-center items-center gap-6 text-xl mb-8">
+				<a href="mailto:vishant258@gmail.com"
+					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
+					<i class="ph ph-envelope-simple text-2xl"></i>
+				</a>
+				<!-- Phone -->
+				<a href="tel:+916352481737"
+					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
+					<i class="ph ph-phone text-2xl"></i> +91 6352481737
+				</a>
+				<!-- GitHub -->
+				<a href="https://github.com/vishantcodes"
+					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
+					<i class="ph ph-github-logo text-2xl"></i>
+				</a>
+				<!-- LinkedIn -->
+				<a href="https://www.linkedin.com/in/vishant-soni-5691a0194"
+					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
+					<i class="ph ph-linkedin-logo text-2xl"></i>
+				</a>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer class="pb-4 text-center text-xs font-mono">
+			<p class="muted">Designed & Built with ❤️ and ☕ masala tea by Vishant Soni</p>
+		</footer>
+
+
+		<script>
+			// Simple tab logic (if required later)
+			function openTab(evt, jobName) {
+				var i, tabcontent, tablinks;
+				tabcontent = document.getElementsByClassName("tab-content");
+				for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
+				tablinks = document.getElementsByClassName("tab-btn");
+				for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
+				document.getElementById(jobName).style.display = "block";
+				evt.currentTarget.classList.add("active");
+			}
+
+			// Mobile menu logic & fade-in observer
+			document.addEventListener('DOMContentLoaded', () => {
+				const btn = document.getElementById('mobile-menu-btn');
+				const menu = document.getElementById('mobile-menu');
+				const closeBtn = document.getElementById('close-menu-btn');
+				const links = document.querySelectorAll('.mobile-link');
+
+				function toggleMenu() { menu.classList.toggle('translate-x-full'); document.body.classList.toggle('overflow-hidden'); }
+				if (btn) btn.addEventListener('click', toggleMenu);
+				if (closeBtn) closeBtn.addEventListener('click', toggleMenu);
+				links.forEach(link => link.addEventListener('click', toggleMenu));
+
+				// Navbar hide/show on scroll
+				let lastScroll = 0;
+				const navbar = document.getElementById('navbar');
+				window.addEventListener('scroll', () => {
+					const currentScroll = window.pageYOffset;
+					if (currentScroll <= 0) { navbar.classList.remove('-translate-y-full'); navbar.classList.remove('shadow-lg'); return; }
+					if (currentScroll > lastScroll && !navbar.classList.contains('-translate-y-full')) { navbar.classList.add('-translate-y-full'); }
+					else if (currentScroll < lastScroll && navbar.classList.contains('-translate-y-full')) { navbar.classList.remove('-translate-y-full'); navbar.classList.add('shadow-lg'); }
+					lastScroll = currentScroll;
+				});
+
+				// Intersection observer for fade-in
+				const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+				const observer = new IntersectionObserver((entries) => {
+					entries.forEach(entry => {
+						if (entry.isIntersecting) { entry.target.classList.add('is-visible'); observer.unobserve(entry.target); }
+					});
+				}, observerOptions);
+				document.querySelectorAll('.fade-in-section').forEach(section => observer.observe(section));
+			});
+		</script>
+</body>
+
+</html>
