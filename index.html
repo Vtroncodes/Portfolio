@@ -264,7 +264,13 @@
 			transform: translateX(4px);
 			box-shadow: 0 4px 20px rgba(255, 51, 51, 0.15);
 		}
-	</style>
+	
+.tab-btn{padding:14px 18px;cursor:pointer;border-left:2px solid #222;transition:.3s;text-align:left;background:transparent}
+	.tab-btn.active{border-left:3px solid var(--accent);color:var(--accent);background:var(--panel)}
+	.tab-content{display:none}
+	.tab-content.active{display:block}
+
+</style>
 </head>
 
 <body class="antialiased leading-relaxed">
@@ -320,10 +326,10 @@
 			<h2 class="text-2xl md:text-4xl font-semibold muted mb-6">I build scalable web applications & microservices.
 			</h2>
 			<p class="muted max-w-xl text-lg mb-8 leading-relaxed">
-				Full-Stack Engineer with 2 years of experience building scalable, data-driven web applications using
-				Laravel, React.js, and MySQL. Skilled in designing RESTful APIs, implementing microservices in Node.js,
-				and optimizing performance through database tuning. Experienced in multi-tenant
-				SaaS, API architecture, and work flow automation with Zapier and n8n.
+				Full-stack engineer specializing in Laravel, Node.js, React, and MySQL, with hands-on experience
+				building scalable multi-tenant applications, designing robust APIs and business logic,
+				integrating AI-powered features, and optimizing backend performance for complex,
+				database-driven systems.
 			</p>
 			<div class="flex gap-4">
 				<a href="#work"
@@ -404,7 +410,7 @@
 							</div>
 							<span class="text-xs font-mono muted bg-accent/10 px-3 py-1 rounded-full">Current</span>
 						</div>
-						<p class="font-mono text-xs muted mb-4">19 May 2025 — Present · Vadodara, Gujarat</p>
+						<p class="font-mono text-xs muted mb-4">May 2025 — June 2026 · Vadodara, Gujarat</p>
 						<ul class="space-y-2 muted text-sm">
 							<li class="flex items-start"><i
 									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
@@ -437,7 +443,7 @@
 							<h3 class="text-lg font-semibold text-white">Backend Developer</h3>
 							<p class="text-accent font-mono text-sm">Vardaam Websolutions Pvt. LTD.</p>
 						</div>
-						<p class="font-mono text-xs muted mb-4 mt-2">19 Sep 2024 — 15 May 2025 · Vadodara, Gujarat</p>
+						<p class="font-mono text-xs muted mb-4 mt-2">Sep 2024 — May 2025 · Vadodara, Gujarat</p>
 						<ul class="space-y-2 muted text-sm">
 							<li class="flex items-start"><i
 									class="ph-fill ph-caret-right text-accent mr-2 mt-1 flex-shrink-0"></i>
@@ -526,57 +532,41 @@
 		<section id="work" class="py-20 fade-in-section">
 			<h2
 				class="numbered-heading flex items-center text-2xl md:text-3xl font-bold mb-8 after:content-[''] after:block after:w-48 after:h-[1px] after:bg-[#202020] after:ml-5">
-				Some Things I've Built</h2>
+				Projects</h2>
 
-			<div class="grid md:grid-cols-2 gap-6">
-				<!-- Project: Multi-tenant SaaS -->
-				<article class="panel">
-					<p class="font-mono text-accent text-xs mb-2">Featured Project</p>
-					<h3 class="text-xl font-bold mb-3">Multi-tenant POS Orchestrator</h3>
-					<p class="muted text-sm mb-4">
-						A multi-tenant SaaS platform that orchestrates transactions between POS systems and retail
-						stores, implemented with Laravel APIs, worker queues, and MySQL optimizations. Includes API
-						documentation and monitoring.
-					</p>
-					<ul class="flex flex-wrap gap-2 font-mono text-xs muted mb-3">
-						<li>Laravel</li>
-						<li>MySQL</li>
-						<li>Redis</li>
-						<li>Docker</li>
-					</ul>
-				</article>
+			<div class="grid md:grid-cols-[250px_1fr] gap-8">
+				<div class="flex flex-col">
+					<button class="tab-btn active p-4 text-left" onclick="showTab('expense',this)">Expense Management System</button>
+					<button class="tab-btn p-4 text-left" onclick="showTab('url',this)">URL Shortener</button>
+				</div>
 
-				<!-- Project: Social Automation -->
-				<article class="panel">
-					<p class="font-mono text-accent text-xs mb-2">Featured Project</p>
-					<h3 class="text-xl font-bold mb-3">Social Media Automation Platform</h3>
-					<p class="muted text-sm mb-4">
-						Platform integrating Meta APIs, OpenAI, and LangChain microservices. Contains Node js
-						microservices for content automation, scheduling, and analytics.
-					</p>
-					<ul class="flex flex-wrap gap-2 font-mono text-xs muted mb-3">
-						<li>Node.js</li>
-						<li>OpenAI</li>
-						<li>Meta APIs</li>
-					</ul>
-				</article>
+				<div>
+					<div id="expense" class="tab-content active panel">
+						<h3 class="text-2xl font-bold mb-3">Expense Approval & Reimbursement System</h3>
+						<p class="mb-4">
+							Role-based expense management platform for organizations to manage employee reimbursements,
+							vendor payments, and advance requests through a multi-stage approval workflow.
+						</p>
+						<div class="mb-4">Tech: Laravel, MySQL, Blade, Bootstrap, Spatie Permissions</div>
+						<a href="https://github.com/vishantCodes/Expense-management-system" target="_blank"
+							class="border px-4 py-2 inline-block">View GitHub</a>
+					</div>
 
-				<!-- Card: Migration & Maintenance -->
-				<article class="panel">
-					<h4 class="text-lg font-semibold mb-2">Legacy App Maintenance</h4>
-					<p class="muted text-sm">Upgraded and patched older PHP/Laravel apps, fixed critical bugs, and added
-						features while preserving data integrity.</p>
-				</article>
-
-				<!-- Card: Developer Tools -->
-				<article class="panel">
-					<h4 class="text-lg font-semibold mb-2">Developer Tools & Widgets</h4>
-					<p class="muted text-sm">Small tools and widgets for internal dashboards, analytics endpoints, and
-						data migration scripts.</p>
-				</article>
+					<div id="url" class="tab-content panel">
+						<h3 class="text-2xl font-bold mb-3">Real-Time URL Shortener, QR Generator & Analytics Engine</h3>
+						<p class="mb-4">
+							Full-stack utility application that transforms long URLs into tracking-ready short links
+							and generates dynamic QR codes with analytics support.
+						</p>
+						<div class="mb-4">Tech: Node.js, React.js, MySQL</div>
+						<a href="https://github.com/vishantCodes/url-shortner" target="_blank"
+							class="border px-4 py-2 inline-block">View GitHub</a>
+					</div>
+				</div>
 			</div>
 		</section>
 
+		
 		<!-- Skills & Education -->
 		<section class="py-20 fade-in-section">
 			<div class="grid md:grid-cols-2 gap-8">
@@ -584,28 +574,28 @@
 					<h3 class="text-2xl font-bold mb-4">Skills</h3>
 					<div class="space-y-3 muted text-sm">
 						<div>
-							<p class="text-accent font-mono text-xs mb-1">Backend:</p>
-							<p>Laravel, PHP, RESTful APIs, Node.js (Express), Python</p>
+							<p class="text-accent font-mono text-xs mb-1">Frameworks:</p>
+							<p>Laravel, Node.js</p>
 						</div>
 						<div>
-							<p class="text-accent font-mono text-xs mb-1">Frontend:</p>
-							<p>React.js, JavaScript, TypeScript, Tailwind, Bootstrap, jQuery</p>
+							<p class="text-accent font-mono text-xs mb-1">Languages:</p>
+							<p>PHP, JavaScript, TypeScript</p>
+						</div>
+						<div>
+							<p class="text-accent font-mono text-xs mb-1">Library:</p>
+							<p>React</p>
 						</div>
 						<div>
 							<p class="text-accent font-mono text-xs mb-1">Database:</p>
 							<p>MySQL</p>
 						</div>
 						<div>
-							<p class="text-accent font-mono text-xs mb-1">Dev Tools:</p>
-							<p>Git, Postman, Docker (Basic), Composer, npm</p>
+							<p class="text-accent font-mono text-xs mb-1">Tools:</p>
+							<p>Git, Docker</p>
 						</div>
 						<div>
-							<p class="text-accent font-mono text-xs mb-1">Automation & Integration:</p>
-							<p>Zapier, n8n, APIs, Workflow automation</p>
-						</div>
-						<div>
-							<p class="text-accent font-mono text-xs mb-1">Other:</p>
-							<p>Redis, Performance optimization, SaaS architecture</p>
+							<p class="text-accent font-mono text-xs mb-1">Core:</p>
+							<p>API Design, Database Design, System Scalability</p>
 						</div>
 					</div>
 				</div>
@@ -616,23 +606,17 @@
 						<div>
 							<p class="text-white font-semibold">M.Sc. (Applied Physics)</p>
 							<p class="text-accent font-mono text-xs">Maharaja Sayajirao University of Baroda</p>
-							<p class="text-xs">May 2018 to October 2020 — 67.13%</p>
+							<p class="text-xs">July 2018 - October 2020 — 67.13%</p>
 						</div>
 						<div>
 							<p class="text-white font-semibold">B.Sc. (Physics)</p>
 							<p class="text-accent font-mono text-xs">Maharaja Sayajirao University of Baroda</p>
-							<p class="text-xs">May 2014 to Summer 2017 — 54.7%</p>
+							<p class="text-xs">July 2014 - October 2017 — 54.7%</p>
 						</div>
 						<div>
 							<p class="text-white font-semibold">HSC (GSEB, 2014)</p>
-							<p class="text-xs">54.46% (2012 to 2014)</p>
+							<p class="text-xs">54.46% (2012 - 2014)</p>
 						</div>
-					</div>
-
-					<div class="mt-8">
-						<h4 class="text-lg font-bold mb-3">Soft Skills</h4>
-						<p class="muted text-sm">Cross-team communication, Client communication, Problem-solving,
-							Adaptability, API Documentation</p>
 					</div>
 				</div>
 			</div>
@@ -642,28 +626,22 @@
 		<section id="contact" class="py-10 fade-in-section text-center">
 			<p class="text-accent font-mono mb-4">04. What's Next?</p>
 			<h2 class="text-3xl md:text-4xl font-bold mb-4">Get In Touch</h2>
+			<p class="muted mb-2">📍 Vadodara, Gujarat</p>
 			<p class="muted mb-6 max-w-xl mx-auto">Although not always actively looking, my inbox is open — feel free to
-				reach out about backend work, microservices, or freelance projects.</p>
+				reach out about Backend and Full-Stack work, microservices, or exiting projects.</p>
 
-			<div class="flex flex-wrap justify-center items-center gap-6 text-xl mb-8">
+			<div class="flex flex-wrap justify-center items-center gap-6 text-base md:text-xl mb-8">
 				<a href="mailto:vishantsoni.work@gmail.com"
 					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
-					<i class="ph ph-envelope-simple text-2xl"></i>
+					<i class="ph ph-envelope-simple text-2xl"></i> Email
 				</a>
-				<!-- Phone -->
 				<a href="tel:+916352481737"
 					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
-					<i class="ph ph-phone text-2xl"></i> +91 6352481737
+					<i class="ph ph-phone text-2xl"></i> Call
 				</a>
-				<!-- GitHub -->
 				<a href="https://github.com/vishantcodes"
 					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
-					<i class="ph ph-github-logo text-2xl"></i>
-				</a>
-				<!-- LinkedIn -->
-				<a href="https://www.linkedin.com/in/vishant-soni-5691a0194"
-					class="flex items-center gap-2 px-5 py-3 rounded border border-accent text-accent hover:bg-accent hover:text-black transition-all transform hover:-translate-y-1">
-					<i class="ph ph-linkedin-logo text-2xl"></i>
+					<i class="ph ph-github-logo text-2xl"></i> GitHub
 				</a>
 			</div>
 		</section>
@@ -673,17 +651,12 @@
 			<p class="muted">Designed & Built with ❤️ and Masala tea by Vishant Soni</p>
 		</footer>
 
-
 		<script>
-			// Simple tab logic (if required later)
-			function openTab(evt, jobName) {
-				var i, tabcontent, tablinks;
-				tabcontent = document.getElementsByClassName("tab-content");
-				for (i = 0; i < tabcontent.length; i++) { tabcontent[i].style.display = "none"; }
-				tablinks = document.getElementsByClassName("tab-btn");
-				for (i = 0; i < tablinks.length; i++) { tablinks[i].classList.remove("active"); }
-				document.getElementById(jobName).style.display = "block";
-				evt.currentTarget.classList.add("active");
+			function showTab(id, btn) {
+				document.querySelectorAll('.tab-content').forEach(x => x.classList.remove('active'));
+				document.querySelectorAll('.tab-btn').forEach(x => x.classList.remove('active'));
+				document.getElementById(id).classList.add('active');
+				btn.classList.add('active');
 			}
 
 			// Mobile menu logic & fade-in observer
